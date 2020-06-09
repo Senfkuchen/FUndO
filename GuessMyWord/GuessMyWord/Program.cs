@@ -8,8 +8,11 @@ namespace GuessMyWord
 {
     class Program
     {
+        static WordGenerator wordGenerator = new WordGenerator();
         static void Main(string[] args)
         {
+            var guessWord = wordGenerator.selectWord();
+
         }
     }
 }
