@@ -8,34 +8,24 @@ namespace GuessMyWord
 {
     class Program
     {
-        private static readonly WordGenerator WordGenerator = new WordGenerator();
+        private static readonly ModelAndLogic model = new ModelAndLogic();
         static void Main(string[] args)
         {
-            var guessWord = WordGenerator.SelectWord();
-            var solvedWord = new string('*', guessWord.Length);
             char key;
-            int countFails = 0;
             do
             { 
-                Console.WriteLine($"Wort : {solvedWord}\n");
+                Console.WriteLine($"Wort : {model.SolvedWord}\n");
                 key = Console.ReadKey().KeyChar;
-                if (!guessWord.Contains(key))
-                {
-                    countFails++;
-                }
-                //Aufbereitung des bisher gelösten Wortes -> solveWord
+                model.updateWithGuessKey(key);
                 Console.Clear();
-                foreach (var letterTuple in guessWord.Select((x, i) => new { Value = x, Index = i }))
-                {
-                    if (letterTuple.Value.Equals(key))
-                    {
-                        solvedWord = solvedWord.Remove(letterTuple.Index, 1).Insert(letterTuple.Index, key.ToString());
-                    }                    
-                }
-            } while (!key.Equals('@') && !solvedWord.Equals(guessWord));
-            Console.WriteLine($"Lösungswort: : {guessWord}\n");
-            Console.WriteLine($"Fehlversuche : {countFails}");
+            } while (!key.Equals('@') && !model.SolvedWord.Equals(model.GuessWord));
+            Console.WriteLine($"Lösungswort: : {model.GuessWord}\n");
+            Console.WriteLine($"Fehlversuche : {model.CountFails}");
             Console.ReadKey();
+
+            //Idee Console und logik mit Event verbinden->OnChange ->Redraw oder so ähnlich
+
+
         }
     }
 }
