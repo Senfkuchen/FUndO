@@ -11,12 +11,14 @@ namespace GuessMyWord
         public string GuessWord { get; set; }
         public string SolvedWord { get; set; }
         public int CountFails { get; set; }
+        public ProgramState programState { get; set; }
 
         private WordGenerator wordGenerator = new WordGenerator();
 
         public ModelAndLogic()
         {
             InitializeModel();
+            programState = ProgramState.InProgress;
         }
 
         public void InitializeModel()
@@ -28,6 +30,12 @@ namespace GuessMyWord
 
         public void updateWithGuessKey(char key)
         {
+            if (key.Equals('@'))
+            {
+                programState = ProgramState.Interrupted;
+                return;
+            }
+
             if (!GuessWord.Contains(key))
             {
                 CountFails++;
@@ -41,7 +49,10 @@ namespace GuessMyWord
                     SolvedWord = SolvedWord.Remove(letterTuple.Index, 1).Insert(letterTuple.Index, key.ToString());
                 }
             }
+            if (SolvedWord.Equals(GuessWord))
+            {
+                programState = ProgramState.Finishing;
+            }
         }
-
     }
 }

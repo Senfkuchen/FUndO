@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomConsole.cs" />
+    <Compile Include="GuessMyWordProgramm.cs" />
+    <Compile Include="ProgramState.cs" />
     <Compile Include="ModelAndLogic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

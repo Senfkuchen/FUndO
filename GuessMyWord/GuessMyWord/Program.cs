@@ -8,22 +8,15 @@ namespace GuessMyWord
 {
     class Program
     {
-        private static readonly ModelAndLogic model = new ModelAndLogic();
+        public Program()
+        {
+
+        }
         static void Main(string[] args)
         {
-            char key;
-            do
-            { 
-                Console.WriteLine($"Wort : {model.SolvedWord}\n");
-                key = Console.ReadKey().KeyChar;
-                model.updateWithGuessKey(key);
-                Console.Clear();
-            } while (!key.Equals('@') && !model.SolvedWord.Equals(model.GuessWord));
-            Console.WriteLine($"Lösungswort: : {model.GuessWord}\n");
-            Console.WriteLine($"Fehlversuche : {model.CountFails}");
-            Console.ReadKey();
+            GuessMyWordProgramm prog = new GuessMyWordProgramm();
 
-            //Idee Console und logik mit Event verbinden->OnChange ->Redraw oder so ähnlich
+            prog.run();
 
 
         }
