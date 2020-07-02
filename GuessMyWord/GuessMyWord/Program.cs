@@ -14,11 +14,9 @@ namespace GuessMyWord
         }
         static void Main(string[] args)
         {
-            GuessMyWordProgramm prog = new GuessMyWordProgramm();
+            Controller controller = new Controller();
 
-            prog.run();
-
-
+            controller.run();
         }
     }
 }

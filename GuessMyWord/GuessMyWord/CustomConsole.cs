@@ -8,34 +8,34 @@ namespace GuessMyWord
 {
     class CustomConsole
     {
-        ModelAndLogic referenceToModel;
-        public CustomConsole(ModelAndLogic model)
+        public CustomConsole()
         {
-            referenceToModel = model;
         }
 
-        public void input()
+        public char input()
         {
             char key = Console.ReadKey().KeyChar;
-            this.referenceToModel.updateWithGuessKey(key);
-            Console.Clear();
+            return key;
+            //this.referenceToModel.updateWithGuessKey(key);
+            //Console.Clear();
         }
 
-        public void draw()
+        public void draw(Model model)
         {
-            if (referenceToModel.programState.Equals(ProgramState.InProgress))
+            Console.Clear();
+            if (model.programState.Equals(ProgramState.InProgress))
             {
-                Console.WriteLine($"Wort : {referenceToModel.SolvedWord}\n");
+                Console.WriteLine($"Wort : {model.SolvedWord}\n");
             }
-            else if (referenceToModel.programState.Equals(ProgramState.Finishing))
+            else if (model.programState.Equals(ProgramState.Finishing))
             {
-                Console.WriteLine($"Lösungswort: : {referenceToModel.GuessWord}\n");
-                Console.WriteLine($"Fehlversuche : {referenceToModel.CountFails}");
+                Console.WriteLine($"Lösungswort: : {model.GuessWord}\n");
+                Console.WriteLine($"Fehlversuche : {model.CountFails}");
                 Console.ReadKey();
             }
-            else if (referenceToModel.programState.Equals(ProgramState.Interrupted))
+            else if (model.programState.Equals(ProgramState.Interrupted))
             {
-                Console.WriteLine($"Programm wurde abgebrochen! Fehlversuche bis dahin: {referenceToModel.CountFails}");
+                Console.WriteLine($"Programm wurde abgebrochen! Fehlversuche bis dahin: {model.CountFails}");
                 Console.ReadKey();
             }
         }

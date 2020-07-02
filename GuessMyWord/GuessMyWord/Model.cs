@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GuessMyWord
 {
-    class ModelAndLogic
+    class Model
     {
         public string GuessWord { get; set; }
         public string SolvedWord { get; set; }
@@ -15,7 +15,7 @@ namespace GuessMyWord
 
         private WordGenerator wordGenerator = new WordGenerator();
 
-        public ModelAndLogic()
+        public Model()
         {
             InitializeModel();
             programState = ProgramState.InProgress;
