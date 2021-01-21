@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace GuessMyWord
 {
@@ -17,8 +13,7 @@ namespace GuessMyWord
 
         public Model()
         {
-            InitializeModel();
-            programState = ProgramState.InProgress;
+            InitializeModel();            
         }
 
         public void InitializeModel()
@@ -26,6 +21,33 @@ namespace GuessMyWord
             GuessWord = wordGenerator.SelectWord();
             SolvedWord = new string('*', GuessWord.Length);
             CountFails = 0;
+            programState = ProgramState.Starting;
+        }
+
+        public void updateModel(char inputKey)
+        {
+            if (programState.Equals(ProgramState.Starting))
+            {
+                //React to input
+                programState = ProgramState.InProgress;
+            }
+            else if (programState.Equals(ProgramState.InProgress))
+            {
+                this.updateWithGuessKey(inputKey);
+            }
+            else if (programState.Equals(ProgramState.Solved))
+            {
+                /*Console.WriteLine("Nochmal : j für ja!");*///-> Das muss nach draw für State solved
+                if (inputKey.Equals('j'))
+                {
+                    programState = ProgramState.Starting;
+                    this.InitializeModel();
+                }
+                else
+                {
+                    programState = ProgramState.Finishing;
+                }
+            }
         }
 
         public void updateWithGuessKey(char key)
@@ -40,8 +62,7 @@ namespace GuessMyWord
             {
                 CountFails++;
             }
-            //Aufbereitung des bisher gelösten Wortes -> solvedWord
-            //Console.Clear();.>Wohin?
+            
             foreach (var letterTuple in GuessWord.Select((x, i) => new { Value = x, Index = i }))
             {
                 if (letterTuple.Value.Equals(key))
@@ -51,7 +72,7 @@ namespace GuessMyWord
             }
             if (SolvedWord.Equals(GuessWord))
             {
-                programState = ProgramState.Finishing;
+                programState = ProgramState.Solved;
             }
         }
     }
