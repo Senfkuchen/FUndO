@@ -18,7 +18,7 @@ namespace GuessMyWord
 
         public void InitializeModel()
         {
-            GuessWord = wordGenerator.SelectWord();
+            GuessWord = wordGenerator.SelectRandomWord();
             SolvedWord = new string('*', GuessWord.Length);
             CountFails = 0;
             programState = ProgramState.Starting;
