@@ -36,5 +36,29 @@ namespace UnitTests
             }
             Assert.IsTrue(exceptionHappened, "Check exception was triggered..");
         }
+
+        [TestMethod]
+        public void TestModel()
+        {
+            var model = new Model();
+            model.InitializeModel();
+            Assert.IsTrue(model.programState.Equals(ProgramState.Starting));
+            model.updateModel(' ');
+            Assert.IsTrue(model.programState.Equals(ProgramState.InProgress));
+            model.updateWithGuessKey(' ');
+            //still in progress
+            Assert.IsTrue(model.programState.Equals(ProgramState.InProgress));
+            model.SolvedWord = model.GuessWord;
+            //enter anything - word is solved
+            model.updateWithGuessKey(' ');
+            Assert.IsTrue(model.programState.Equals(ProgramState.Solved));
+            model.updateModel('j');
+            Assert.IsTrue(model.programState.Equals(ProgramState.Starting));
+            model.updateModel(' ');
+            Assert.IsTrue(model.programState.Equals(ProgramState.InProgress));
+            Assert.IsTrue(model.CountFails == 0);
+            model.updateModel('@');
+            Assert.IsTrue(model.programState.Equals(ProgramState.Interrupted));
+        }
     }
 }

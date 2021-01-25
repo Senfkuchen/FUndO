@@ -2,7 +2,7 @@
 
 namespace GuessMyWord
 {
-    class Model
+    public class Model
     {
         public string GuessWord { get; set; }
         public string SolvedWord { get; set; }
@@ -37,7 +37,6 @@ namespace GuessMyWord
             }
             else if (programState.Equals(ProgramState.Solved))
             {
-                /*Console.WriteLine("Nochmal : j für ja!");*///-> Das muss nach draw für State solved
                 if (inputKey.Equals('j'))
                 {
                     programState = ProgramState.Starting;
