@@ -2,7 +2,7 @@
 
 namespace GuessMyWord
 {
-    class CustomConsole
+    public class CustomConsole
     {
         public CustomConsole()
         {
@@ -12,8 +12,6 @@ namespace GuessMyWord
         {
             char key = Console.ReadKey().KeyChar;
             return key;
-            //this.referenceToModel.updateWithGuessKey(key);
-            //Console.Clear();
         }
 
         public void draw(Model model)

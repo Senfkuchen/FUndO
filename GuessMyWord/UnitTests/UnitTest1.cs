@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using GuessMyWord;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -59,6 +60,16 @@ namespace UnitTests
             Assert.IsTrue(model.CountFails == 0);
             model.updateModel('@');
             Assert.IsTrue(model.programState.Equals(ProgramState.Interrupted));
+        }
+        [TestMethod]
+        public void TestConsole() {
+            var stringWriter = new StringWriter();
+            var model = new Model();
+            model.InitializeModel();
+            var customConsole = new CustomConsole();
+            Console.SetOut(stringWriter);
+            customConsole.draw(model);
+            Assert.IsTrue(stringWriter.ToString().Contains("Startbildschirm"));
         }
     }
 }
