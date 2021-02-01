@@ -61,15 +61,5 @@ namespace UnitTests
             model.updateModel('@');
             Assert.IsTrue(model.programState.Equals(ProgramState.Interrupted));
         }
-        [TestMethod]
-        public void TestConsole() {
-            var stringWriter = new StringWriter();
-            var model = new Model();
-            model.InitializeModel();
-            var customConsole = new CustomConsole();
-            Console.SetOut(stringWriter);
-            customConsole.draw(model);
-            Assert.IsTrue(stringWriter.ToString().Contains("Startbildschirm"));
-        }
     }
 }
